@@ -95,7 +95,7 @@ div ul li{
     outline: none;
     background-color: green;
     border: none;
-    width: 100px;
+    width: 110px;
     height: 40px;
     color: white;
     font-size: 16px;
@@ -103,7 +103,20 @@ div ul li{
     margin-right: 90px;
     margin-top: 60px;
 }
-
+.searchbar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    justify-content: flex-end; /* Aligns items to the right */
+  }
+  
+  .search-button {
+    width: 3.5rem;
+    height: 2.5rem;
+    background-color: green;
+    margin-left: 5px; /* Add some space between input and button */
+  }
+  
 .button2 {
     outline: none;
     background-color: green;

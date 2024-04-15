@@ -26,7 +26,7 @@ const features = [
   { name: "Departments", description: "Liwonde Private Hospital has the following department, Radiology, dental, martenity,Laborotory,Operation theatre,ART and many more. each department is managed by team of well trained proffessionals" },
   {
     name: "locations",
-    description: "Liwonde private hospital is located along M3 Road near, puma filling station",
+    description: "Liwonde private hospital is located along M3 Road near, puma filling station near Zest Garden",
   },
   { name: "Enquiries", description: "If you have questions, complaints or anything you need clarification don't hesitate to reach out to us"  },
   {

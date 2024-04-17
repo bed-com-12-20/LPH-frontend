@@ -99,7 +99,7 @@ export default function QuickServiceSection() {
                   height={200}
                 />
                 <h3 className="book">News and Updates</h3>
-                <p className="make2">What is happening right now at Liwonde private hospital?
+                <p className="make">What is happening right now at Liwonde private hospital?
                 subscribe to latest news,update about a service or a product</p><a href="subscribe" className="">
                   <button className="booking">Subscribe</button>
                   </a>

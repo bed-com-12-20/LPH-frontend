@@ -27,13 +27,31 @@ export default function Staff() {
 
   // Function to handle login button click
   const handleLoginClick = (department: string) => () => {
-    if (!selectedStaff[department].name) {
-      alert("Please select a staff member");
+    const selectedStaffKeys: Record<string, { name: string; picture: string }> = {
+      OPD: { name: 'OPD Name', picture: 'OPD Picture' },
+      Pharmacy: { name: 'Pharmacy Name', picture: 'Pharmacy Picture' },
+      Finance: { name: 'Finance Name', picture: 'Finance Picture' },
+      Maternity: { name: 'Maternity Name', picture: 'Maternity Picture' },
+      Reception: { name: 'Reception Name', picture: 'Reception Picture' },
+      XRay: { name: "", picture: "" },
+      Lab: { name: "", picture: "" },
+      Dental: { name: "", picture: "" },
+    Backstore: { name: "", picture: "" },
+    Vitals: { name: "", picture: "" }
+      // Add more departments here
+    };
+  
+    const selectedStaffDepartment = selectedStaffKeys[department];
+  
+    if (!selectedStaffDepartment || !selectedStaffDepartment.name) {
+      alert('Please select a staff member');
       return;
     }
+  
     // Handle login logic here
     window.location.href = `/${department.replace(/\s+/g, '')}/Login`;
   };
+  
 
   return (
     <div>

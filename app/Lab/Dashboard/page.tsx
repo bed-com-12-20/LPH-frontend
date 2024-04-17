@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
+
 interface Patient {
   ID: number;
   FirstName: string;
@@ -41,22 +42,6 @@ export default function Sale() {
     }
   };
 
-  const handleViewTable = async () => {
-    try {
-      const response = await fetch(api);
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Data:", data); // Log the data to check its structure
-        setTableData(data);
-        setError(null);
-      } else {
-        throw new Error('Failed to fetch data');
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      alert('Oops! Today\'s data is not available');
-    }
-  };
 
   return (
     <div>
@@ -87,9 +72,11 @@ export default function Sale() {
         </div>
         <div className="button-container">
           <div>
-            <button className="button" onClick={handleViewTable}>
+            <a href="ViewData">
+            <button className="button"  >
               Today's Data
             </button>
+            </a>
           </div>
           <div>
             <a href="Record">

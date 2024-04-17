@@ -5,6 +5,28 @@
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+input {
+  height: 46px;
+}
+
+button {
+  height: 46px;
+}
+
+.hover\:shadow-form:hover {
+  box-shadow: 0px 0px 10px rgba(106, 100, 241, 0.25);
+}
+
+.hover\:shadow-form:focus {
+  box-shadow: 0px 0px 10px rgba(106, 100, 241, 0.25);
+}
 
 
 .box {

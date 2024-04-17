@@ -85,14 +85,19 @@ export default function Lab() {
     updatedData[index] = { ...updatedData[index], ...newData };
     setLab(updatedData);
   };
-
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
   return (
+    
     <div>
       <div id="table">
         <Image src={icon} alt="" width={100} height={100} />
         <div>
           <h1 id="pharma-head">Laboratory</h1>
+         <h1>{formattedDate}</h1> 
+         <br></br>
         </div>
+      
         <div className="table-box">
           <div className="table-row">
             <div className="table-cell">
@@ -110,12 +115,7 @@ export default function Lab() {
             <div className="table-cell">
               <p>TestOrdered</p>
             </div>
-            <div className="table-cell">
-              <p>Date</p>
-            </div>
-            <div className="table-cell">
-              <p>Action</p>
-            </div>
+        
             <div className="table-cell">
               <p>Action</p>
             </div>
@@ -159,29 +159,29 @@ export default function Lab() {
                 onChange={(e) =>
                   updateRow(index, { ...row, PaymentMethod: e.target.value })
                 }
-              >
-                <option value="Cash">Cash</option>
-                <option value="Airtel Money">Airtel Money</option>
-                <option value="Mpamba">Mpamba</option>
-                <option value="Bank">Bank</option>
-              </select>
-            </div>
-            <div className="table-cell">
-              <select
-                value={row.TestOrdered}
-                onChange={(e) =>
-                  updateRow(index, { ...row, TestOrdered: e.target.value })
-                }
-              >
-                <option value="MRDT">MRDT</option>
-                <option value="FBC">FBC</option>
-                <option value="Urine">Urine</option>
-                <option value="TB">TB</option>
-              </select>
-            </div>
-            <div className="table-cell">
-              <p>{row.Date}</p>
-            </div>
+                >
+                <option value="select">select option</option>
+               <option value="Cash">Cash</option>
+               <option value="Airtel Money">Airtel Money</option>
+               <option value="Mpamba">Mpamba</option>
+               <option value="Bank">Bank</option>
+             </select>
+           </div>
+           <div className="table-cell">
+             <select
+               value={row.TestOrdered}
+               onChange={(e) =>
+                 updateRow(index, { ...row, TestOrdered: e.target.value })
+               }
+             >
+               <option value="select">select option</option>
+               <option value="MRDT">MRDT</option>
+               <option value="FBC">FBC</option>
+               <option value="Urine">Urine</option>
+               <option value="TB">TB</option>
+             </select>
+           </div>
+          
             <div className="table-cell">
               <button className="delete" onClick={() => deleteRow(index)}>
                 Delete

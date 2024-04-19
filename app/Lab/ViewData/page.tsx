@@ -6,10 +6,10 @@ import Footer from "@/componets/footer";
 
 interface DataItem {
   id: number;
-  firstName: string;
-  lastName: string;
-  paymentMethod: string;
-  testOrdered: string;
+  FirstName: string;
+  LastName: string;
+  PaymentMethod: string;
+  TestOrdered: string;
 }
 
 const api = "http://localhost:3000/laboratory";
@@ -34,12 +34,13 @@ const ViewData = () => {
   
       // Check if response data is an array
       if (Array.isArray(responseData)) {
-        const mappedData = responseData.map((item: any) => ({
+        const filteredData = responseData.filter((item: any) => item.test_ordered === 'use client');
+        const mappedData = filteredData.map((item: any) => ({
           id: item.id,
-          firstName: item.first_name,
-          lastName: item.last_name,
-          paymentMethod: item.payment_method,
-          testOrdered: item.test_ordered,
+          FirstName: item.first_name,
+          LastName: item.last_name,
+          PaymentMethod: item.payment_method,
+          TestOrdered: item.test_ordered,
         }));
   
         setData(mappedData);
@@ -74,10 +75,10 @@ const ViewData = () => {
             <thead className="bg-gray-800 text-white">
               <tr>
                 <th className="py-2 px-4">ID</th>
-                <th className="py-2 px-4">First Name</th>
-                <th className="py-2 px-4">Last Name</th>
-                <th className="py-2 px-4">Payment Method</th>
-                <th className="py-2 px-4">Test Ordered</th>
+                <th className="py-2 px-4">FirstName</th>
+                <th className="py-2 px-4">LastName</th>
+                <th className="py-2 px-4">PaymentMethod</th>
+                <th className="py-2 px-4">TestOrdered</th>
               </tr>
             </thead>
             <tbody className="bg-gray-100">
@@ -90,10 +91,10 @@ const ViewData = () => {
                   data.map((item) => (
                     <tr key={item.id} className="text-gray-800">
                       <td className="py-2 px-4">{item.id}</td>
-                      <td className="py-2 px-4">{item.firstName}</td>
-                      <td className="py-2 px-4">{item.lastName}</td>
-                      <td className="py-2 px-4">{item.paymentMethod}</td>
-                      <td className="py-2 px-4">{item.testOrdered}</td>
+                      <td className="py-2 px-4">{item.FirstName}</td>
+                      <td className="py-2 px-4">{item.LastName}</td>
+                      <td className="py-2 px-4">{item.PaymentMethod}</td>
+                      <td className="py-2 px-4">{item.TestOrdered}</td>
                     </tr>
                   ))
                 ) : (

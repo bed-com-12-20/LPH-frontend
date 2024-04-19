@@ -17,8 +17,8 @@ export default function Finance(){
                 <header>Finance</header>
                 <ul>
                     <li><a href="#">Profile</a></li>
-                    <li><a href="#">Records</a></li>
-                    <li><a href="Sale">Sales</a></li>
+                    <li><a href="#">Transaction History</a></li>
+                    <li><a href="Summary">Day Summary</a></li>
                     <li><a href="Login">Logout</a></li>
                 </ul>
             </div>
@@ -32,15 +32,17 @@ export default function Finance(){
                     />
           </div>
             <div id="searchbar">
-              <span> <Search/></span>  <input type="text"  id="searchbar"placeholder="search for patients"
+              <span> </span>  <input type="text"  id="searchbar"placeholder="search for patients"
             />
             
 
             </div>
             <div className="button-container">
+                <a href="www.facebook.com">
                 <div>
-                    <button className="button">View Table</button>
+                    <button className="button">TodaysData</button>
                 </div>
+                </a>
                 <div>
                     <a href="Record">
                     <button className="button2">New Day</button>

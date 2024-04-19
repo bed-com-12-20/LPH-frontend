@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './style.css';
 import Image from "next/image";
 import icon from '../../images/icon.png';
@@ -18,9 +17,31 @@ interface FinanceItem {
 
 export default function Finance() {
     const [finance, setFinance] = useState<FinanceItem[]>([
-        { ID: 1, firstName: '', LastName: '', Treatment: '', Amount: '', Paymethod: '', TestOrder: '', Date: '' }
+        { ID: 1, firstName: '', LastName: '', Treatment: '', Amount: '', Paymethod: '', TestOrder: '', Date: new Date().toDateString() }
     ]);
+
+    const [dataModified, setDataModified] = useState(false);
     const [totalAmount, setTotalAmount] = useState<number>(0);
+
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            if (dataModified) {
+                event.preventDefault();
+                event.returnValue = "";
+            }
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, [dataModified]);
+
+    useEffect(() => {
+        // Calculate total amount whenever finance data changes
+        calculateTotal(finance);
+    }, [finance]);
 
     const addRow = () => {
         const newRow: FinanceItem = {
@@ -31,15 +52,16 @@ export default function Finance() {
             Amount: '',
             Paymethod: '',
             TestOrder: '',
-            Date: ''
+            Date: new Date().toDateString()
         };
         setFinance(prevData => [...prevData, newRow]);
+        setDataModified(true);
     }
 
     const deleteRow = (index: number) => {
         setFinance(prevData => {
             const newData = prevData.filter((row, i) => i !== index);
-            calculateTotal(newData); // Recalculate total after row deletion
+            setDataModified(true);
             return newData;
         });
     }
@@ -48,15 +70,20 @@ export default function Finance() {
         const updatedData = [...finance];
         updatedData[index] = { ...updatedData[index], ...newData };
         setFinance(updatedData);
-
-        // Calculate total amount whenever amount is updated
-        calculateTotal(updatedData);
+        setDataModified(true);
     }
 
     const calculateTotal = (data: FinanceItem[]) => {
-        const total = data.reduce((acc, curr) => acc + parseFloat(curr.Amount || '0'), 0);
+        const currentDate = new Date();
+        const formattedCurrentDate = currentDate.toDateString();
+        const total = data
+            .filter((item) => item.Date === formattedCurrentDate)
+            .reduce((acc, curr) => acc + parseFloat(curr.Amount || '0'), 0);
         setTotalAmount(total);
     }
+
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 
     return (
         <div>
@@ -69,6 +96,7 @@ export default function Finance() {
                 />
                 <div>
                     <h1 id="pharma-head">Finance Records</h1>
+                    <h1 className="tsiku">{formattedDate}</h1>
                 </div>
                 <div className="table-box">
                     <div className="table-row">
@@ -91,9 +119,6 @@ export default function Finance() {
                             <p>Payment Method</p>
                         </div>
                         <div className="table-cell">
-                            <p>Date</p>
-                        </div>
-                        <div className="table-cell">
                             <p>Action</p>
                         </div>
                     </div>
@@ -107,7 +132,7 @@ export default function Finance() {
                                 id="label"
                                 placeholder="e.g 1"
                                 value={row.ID}
-                                // onChange={(event) => updateRow(index, { ID: parseInt(event.target.value) })}
+                                onChange={(event) => updateRow(index, { ID: parseInt(event.target.value) })}
                             />
                         </div>
                         <div className="table-cell">
@@ -147,18 +172,17 @@ export default function Finance() {
                             />
                         </div>
                         <div className="table-cell">
-                            <select name="" id="type" required>
-                                <option value="">Cash</option>
-                                <option value="">Airtel Money</option>
-                                <option value="">Mpamba</option>
-                                <option value="">Bank</option>
-                            </select>
-                        </div>
-                        <div className="table-cell">
-                            <input
-                                type="date"
+                            <select
+                                value={row.Paymethod}
                                 id="label"
-                            />
+                                onChange={(event) => updateRow(index, { Paymethod: event.target.value })}
+                            >
+                                <option value="">Select Payment Method</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Airtel Money">Airtel Money</option>
+                                <option value="Mpamba">Mpamba</option>
+                                <option value="Bank">Bank</option>
+                            </select>
                         </div>
                         <div className="table-cell">
                             <button className="delete" onClick={() => deleteRow(index)}>Delete</button>
@@ -168,13 +192,13 @@ export default function Finance() {
 
                 {/* Total row */}
                 <div className="table-row total-row">
-                    <div className="table-cell" colSpan={4}>
+                    <div className="table-cell">
                         Total:
                     </div>
                     <div className="table-cell">
                         {totalAmount}
                     </div>
-                    <div className="table-cell" colSpan={3}></div>
+                    <div className="table-cell" ></div>
                 </div>
 
                 <button onClick={addRow} className="button">Add Row</button>

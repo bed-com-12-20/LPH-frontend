@@ -14,6 +14,8 @@ interface MartenityItem {
     MedicalScheme: string;
     Date: string;
 }
+const currentDate = new Date();
+const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 
 export default function Martenity() {
     const [Martenity, setMartenity] = useState<MartenityItem[]>([
@@ -54,6 +56,7 @@ export default function Martenity() {
                 />
                 <div>
                     <h1 id="pharma-head">Martenity</h1>
+                    <h1>{formattedDate}</h1>
                 </div>
                 <div className="table-box">
                     <div className="table-row">

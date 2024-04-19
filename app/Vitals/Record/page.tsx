@@ -14,7 +14,8 @@ interface VitalsItem {
     BloodPressure: string;
     Date: string;
 }
-
+const currentDate = new Date();
+const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 export default function Vitals() {
     const [Vitals, setVitals] = useState<VitalsItem[]>([
         { ID: 1, FirstName: '', LastName: '', Temperature: '', Weight: '', BloodPressure: '', Date: '' }
@@ -55,6 +56,7 @@ export default function Vitals() {
                 />
                 <div>
                     <h1 id="pharma-head">Body Tests</h1>
+                    <h1>{formattedDate}</h1>
                 </div>
                 <div className="table-box">
                     <div className="table-row">

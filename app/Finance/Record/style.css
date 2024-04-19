@@ -28,9 +28,13 @@ body {
 #pharma-head {
     color: black;
     font-weight: 300;
+    font-weight: bolder;
+    font-size: 25px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
 }
-
+.tsiku{
+    font-weight: bolder;
+}
 
 .table-box{
     /* margin-right: 500px; */

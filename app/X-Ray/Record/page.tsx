@@ -14,7 +14,8 @@ interface OPDItem {
     MedicalScheme: string;
     Date: string;
 }
-
+const currentDate = new Date();
+const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 export default function OPD() {
     const [opd, setopd] = useState<OPDItem[]>([
         { ID: 1, firstName: '', LastName: '', Treatment: '', Amount: '', MedicalScheme: '', Date: '' }
@@ -81,6 +82,7 @@ export default function OPD() {
                 />
                 <div>
                     <h1 id="pharma-head">Radiology</h1>
+                    <h1>{formattedDate}</h1>
                     <br></br>
                     <br></br>
                     search bar here

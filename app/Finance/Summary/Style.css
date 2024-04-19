@@ -16,7 +16,7 @@ body {
     margin-top: 0px;
 }
 #table {
-    margin-left: 200px; /* Adjusted margin to create space beside the sidebar */
+    margin-left: 150px; /* Adjusted margin to create space beside the sidebar */
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -35,7 +35,6 @@ body {
 .tsiku{
     font-weight: bolder;
 }
-
 
 .table-box{
     /* margin-right: 500px; */
@@ -86,10 +85,10 @@ body {
     color: green;
     font-size: 16px;
     border-radius: 5px;
-    border: 1px solid green;
+    border: 1px solid black;
 }
 .button:hover{
-    background-color:orange;
+    background-color: orange;
     color: white;
     cursor: pointer;
     transition: all 400ms linear;
@@ -108,7 +107,7 @@ body {
     border: 1px solid green;
 }
 .button1:hover{
-    background-color: orange;
+    background-color:orange;
     color: white;
     cursor: pointer;
     transition: all 400ms linear;
@@ -186,6 +185,8 @@ body {
     .button, .button1{
         width: 90px;
         border: 1px solid green;
+      
+        
 
     }
     

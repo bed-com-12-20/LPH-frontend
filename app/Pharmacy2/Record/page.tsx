@@ -13,7 +13,8 @@ interface PharmacyItem {
     TestOrder: string;
     Date: string;
 }
-
+const currentDate = new Date();
+const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 export default function Pharmacy() {
     const [Pharmacy, setPharmacy] = useState<PharmacyItem[]>([
         { ID: 1, firstName: '', LastName: '', Paymethod: '', TestOrder: '', Date: '' }
@@ -52,6 +53,7 @@ export default function Pharmacy() {
                 />
                 <div>
                     <h1 id="pharma-head">Pharmacy</h1>
+                    <h1>{formattedDate}</h1>
                 </div>
                 <div className="table-box">
                     <div className="table-row">

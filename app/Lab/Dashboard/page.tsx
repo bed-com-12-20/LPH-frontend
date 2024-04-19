@@ -11,6 +11,9 @@ interface Patient {
   ID: number;
   FirstName: string;
   LastName: string;
+  PaymentMethod:string;
+  TestOrdered:string;
+
 }
 
 const api = 'http://localhost:3000/laboratory';
@@ -88,18 +91,12 @@ export default function Sale() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <table>
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-          </tr>
+        
         </thead>
         <tbody>
           {tableData.map(patient => (
             <tr key={patient.ID}>
-              <td>{patient.ID}</td>
-              <td>{patient.FirstName}</td>
-              <td>{patient.LastName}</td>
+           
               {/* Render more table cells for additional patient data */}
             </tr>
           ))}

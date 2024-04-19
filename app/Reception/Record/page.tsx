@@ -13,6 +13,8 @@ interface ReceptionItem {
     PaymentMethod: string;
     Date: string;
 }
+const currentDate = new Date();
+const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 
 export default function Reception() {
     const [Reception, setReception] = useState<ReceptionItem[]>([
@@ -52,6 +54,7 @@ export default function Reception() {
                 />
                 <div>
                     <h1 id="pharma-head">Reception</h1>
+                    <h1>{formattedDate}</h1>
                 </div>
                 <div className="table-box">
                     <div className="table-row">

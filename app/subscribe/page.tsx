@@ -1,13 +1,58 @@
-import Header from '@/componets/navbar'
+'use client'
+// Importing necessary components and icons
+import Header from "@/componets/navbar";
 import Card from "react-bootstrap/Card";
-import Footer from '@/componets/footer'
-import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
+import Footer from '@/componets/footer';
+import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
 
+// Component function
 export default function Example() {
+  // State variables for email and alert
+  const [email, setEmail] = useState(""); 
+  const [alert, setAlert] = useState<{ type: string; message: string } | null>(null);
+
+   const api = "";
+
+  // Function to handle subscription
+  const handlesubscribe = async () => {
+
+    try {
+         // Checking if email is empty
+    if (!email.trim()) {
+      setAlert({ type: "error", message: "Please enter your email address." });
+      return;
+    }
+      // Sending email to backend for subscription
+      const response = await fetch(api, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }), // Sending email value
+      });
+
+      // Checking if subscription was successful
+      if (response.ok) {
+        setAlert({ type: "success", message: "Subscription is successful!" });
+      } else {
+        console.error('Subscription failed:', response.statusText);
+        setAlert({ type: "error", message: "Failed to subscribe. Please try again later." });
+      }
+    } catch (error: any) {
+      console.error('Error subscribing:', error.message);
+    }
+  };
+
+  // JSX structure
   return (
     <>
+      {/* Navbar */}
       <Header />
+      
+      {/* Main content */}
       <div className="mx-auto max-w-7xl px-6 lg:px-8"> 
+        {/* Card section */}
         <div className='bg-gray-400 w-full h-400 justify-center py-24 sm:py-32'>
           <div className="flex">
             <div className="flex-none mr-4">
@@ -53,6 +98,8 @@ export default function Example() {
           </div>
         </div>
       </div>
+
+      {/* Subscription section */}
       <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
@@ -62,20 +109,22 @@ export default function Example() {
                 Stay updated with the latest news, events, and health tips from Liwonde Private Hospital.
               </p>
               <div className="mt-6 flex max-w-md gap-x-4">
-                <label htmlFor="email-address" className="sr-only">
+                <label htmlFor="email" className="sr-only">
                   Email address
                 </label>
                 <input
-                  id="email-address"
+                  id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-                  placeholder="Enter your email"
+                  placeholder="Enter your email address"
                 />
                 <button
-                  type="submit"
+                  onClick={handlesubscribe}
                   className="flex-none rounded-md bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                 >
                   Subscribe
@@ -114,6 +163,8 @@ export default function Example() {
           />
         </div>
       </div>
+
+      {/* Footer */}
       <Footer />
     </>
   );

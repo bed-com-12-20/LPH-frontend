@@ -38,7 +38,7 @@ export default function Finance(){
 
             </div>
             <div className="button-container">
-                <a href="www.facebook.com">
+                <a href="ViewData">
                 <div>
                     <button className="button">TodaysData</button>
                 </div>

@@ -11,13 +11,14 @@ interface FinanceItem {
     Treatment: string;
     Amount: string;
     Paymethod: string;
-    TestOrder: string;
+  
     Date: string;
 }
+const api="";
 
 export default function Finance() {
     const [finance, setFinance] = useState<FinanceItem[]>([
-        { ID: 1, firstName: '', LastName: '', Treatment: '', Amount: '', Paymethod: '', TestOrder: '', Date: new Date().toDateString() }
+        { ID: 1, firstName: '', LastName: '', Treatment: '', Amount: '', Paymethod: '', Date: new Date().toDateString() }
     ]);
 
     const [dataModified, setDataModified] = useState(false);
@@ -51,12 +52,28 @@ export default function Finance() {
             Treatment: '',
             Amount: '',
             Paymethod: '',
-            TestOrder: '',
+         
             Date: new Date().toDateString()
         };
         setFinance(prevData => [...prevData, newRow]);
         setDataModified(true);
     }
+    const handleSubmit = async () => {
+        try {
+          for (const item of finance) {
+            if (!item.firstName || !item.LastName || !item.Treatment || !item.Amount) {
+              alert("Enter All fields !");
+              return;
+            }
+    
+            await postData(api, item);
+          }
+          setDataModified(false); // Reset dataModified after successful submission
+        } catch (error) {
+          console.log("Error connecting to server:", error);
+          alert("Failed to save data");
+        }
+      };
 
     const deleteRow = (index: number) => {
         setFinance(prevData => {
@@ -193,7 +210,7 @@ export default function Finance() {
                 {/* Total row */}
                 <div className="table-row total-row">
                     <div className="table-cell">
-                        Total:
+                        DayTotal:
                     </div>
                     <div className="table-cell">
                         {totalAmount}
@@ -202,7 +219,7 @@ export default function Finance() {
                 </div>
 
                 <button onClick={addRow} className="button">Add Row</button>
-                <button className="button1">Save</button>
+                <button onClick={handleSubmit} className="button1">Save</button>
             </div>
         </div>
     );
